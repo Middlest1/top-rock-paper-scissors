@@ -15,16 +15,31 @@
 /* Pseudocode End */
 
 
+function getUserChoice() {
+    let choice = prompt("Do you select rock, paper, or scissors?").toLowerCase(); 
+    console.log(choice);
 
-let userChoice = prompt("Do you select rock, paper, or scissors?") 
+    if (choice === "rock" || choice === "paper" || choice === "scissors") {
+        return choice;
+    }
 
-console.log(`The User selects ${userChoice}.`)
+    else {
+        alert("That's not a choice. Please select rock, paper, or scissors!");
+        return getUserChoice();
+    }
+}
+
+
+const userChoice = getUserChoice();
+console.log(`The User selects ${userChoice}.`);
+
+
 
 // The user has selected. Their selection is stored in the variable userChoice
 
 
 
-const gameChoices = ["Rock", "Paper", "Scissors"];
+const gameChoices = ["rock", "paper", "scissors"];
 
 function getComputerChoice(gameChoices) {
     const randomChoice = Math.floor(Math.random() * gameChoices.length);
@@ -52,14 +67,14 @@ console.log(`The Computer selects ${computerChoice}.`)
 function playRound(userChoice, computerChoice) {
     if (userChoice === computerChoice) {
         console.log("Draw");
-    } else if ((userChoice === "Rock" && computerChoice === "Scissors") || (userChoice === "Paper" && computerChoice === "Rock") || (userChoice === "Scissors" && computerChoice === "Paper")) {
+    } else if ((userChoice === "rock" && computerChoice === "scissors") || (userChoice === "paper" && computerChoice === "rock") || (userChoice === "scissors" && computerChoice === "paper")) {
         console.log("You Win");
     } else {
         console.log("You Lose");
     }
 }
 
-console.log(playRound(userChoice, computerChoice));
+playRound(userChoice, computerChoice);
 
 
 
