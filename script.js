@@ -33,16 +33,33 @@ function getComputerChoice(gameChoices) {
 
     console.log(`There are ${gameChoices.length} available choices.`);
     console.log(randomChoice);
-    let computerChoice = gameChoices[randomChoice];
-    return computerChoice;
+
+    return gameChoices[randomChoice];
+
+    // let getComputerChoiceResult = gameChoices[randomChoice];
+    // return getComputerChoiceResult;    ----> Do not store the result in a variable that can't be accessed outside the function
 }
 
-console.log(`The Computer selects ${getComputerChoice(gameChoices)}.`)
+const computerChoice = getComputerChoice(gameChoices); // Store the result here
+console.log(computerChoice);
+
+console.log(`The Computer selects ${computerChoice}.`)
 
 // The computer has selected. Its selection is stored in the variable named computerChoice.
 
 
 
+function playRound(userChoice, computerChoice) {
+    if (userChoice === computerChoice) {
+        console.log("Draw");
+    } else if ((userChoice === "Rock" && computerChoice === "Scissors") || (userChoice === "Paper" && computerChoice === "Rock") || (userChoice === "Scissors" && computerChoice === "Paper")) {
+        console.log("You Win");
+    } else {
+        console.log("You Lose");
+    }
+}
+
+console.log(playRound(userChoice, computerChoice));
 
 
 
