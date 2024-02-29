@@ -81,12 +81,15 @@ function playRounds() {
 }
 
 
-function playGame(playRounds, numberOfRounds) {
+function playGame(numberOfRounds) {
   if (numberOfRounds <= 0) {
     return;
   }
-  playRounds();
-  playGame(playRounds, numberOfRounds -1);
+
+  else {
+    playRounds();
+    playGame(numberOfRounds -1);
+  }
 }
 
-playGame(playRounds, 5); // Calling playGame function, replacing numberOfRounds parameter with 5.
+playGame(5); // Calling playGame function, replacing numberOfRounds parameter with 5.
