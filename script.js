@@ -15,75 +15,78 @@
 /* Pseudocode End */
 
 
-function getUserChoice() {
-    let choice = prompt("Do you select rock, paper, or scissors?").toLowerCase(); 
-    console.log(choice);
 
-    if (choice === "rock" || choice === "paper" || choice === "scissors") {
-        return choice;
-    }
 
-    else {
-        alert("That's not a choice. Please select rock, paper, or scissors!");
-        return getUserChoice();
+function playRounds() {
+
+    function getUserChoice() {
+        let choice = prompt("Do you select rock, paper, or scissors?").toLowerCase(); 
+        console.log(choice);
+    
+        if (choice === "rock" || choice === "paper" || choice === "scissors") {
+            return choice;
+        }
+    
+        else {
+            alert("That's not a choice. Please select rock, paper, or scissors!");
+            return getUserChoice();
+        }
     }
+    
+    
+    const userChoice = getUserChoice();
+    console.log(`The User selects ${userChoice}.`);
+    
+    // The user has selected. Their selection is stored in the variable userChoice.
+    
+    
+    
+    const gameChoices = ["rock", "paper", "scissors"];
+    
+    function getComputerChoice(gameChoices) {
+        const randomChoice = Math.floor(Math.random() * gameChoices.length);
+    
+    // gameChoices.length method displays the total number of words in the array; Math.random chooses a number greater than or equal to 0, but less than 1; Math.floor rounds a number down to the nearest integer.
+    
+        console.log(`There are ${gameChoices.length} available choices.`);
+        console.log(randomChoice);
+    
+        return gameChoices[randomChoice];
+    
+        // let getComputerChoiceResult = gameChoices[randomChoice];
+        // return getComputerChoiceResult;    ----> Do not store the result in a variable that can't be accessed outside the function.
+    }
+    
+    const computerChoice = getComputerChoice(gameChoices); // Store the function result here in global scope.
+    console.log(computerChoice);
+    
+    console.log(`The Computer selects ${computerChoice}.`)
+    
+    // The computer has selected. Its selection is stored in the variable named computerChoice.
+    
+    
+    
+    function playRound(userChoice, computerChoice) {
+        if (userChoice === computerChoice) {
+            console.log("Draw");
+        } else if ((userChoice === "rock" && computerChoice === "scissors") || (userChoice === "paper" && computerChoice === "rock") || (userChoice === "scissors" && computerChoice === "paper")) {
+            console.log("You Win");
+        } else {
+            console.log("You Lose");
+        }
+    }
+    
+    playRound(userChoice, computerChoice);
+
 }
 
 
-const userChoice = getUserChoice();
-console.log(`The User selects ${userChoice}.`);
-
-
-
-// The user has selected. Their selection is stored in the variable userChoice
-
-
-
-const gameChoices = ["rock", "paper", "scissors"];
-
-function getComputerChoice(gameChoices) {
-    const randomChoice = Math.floor(Math.random() * gameChoices.length);
-
-// gameChoices.length method displays the total number of words in the array; Math.random chooses a number greater than or equal to 0, but less than 1; Math.floor rounds a number down to the nearest integer.
-
-    console.log(`There are ${gameChoices.length} available choices.`);
-    console.log(randomChoice);
-
-    return gameChoices[randomChoice];
-
-    // let getComputerChoiceResult = gameChoices[randomChoice];
-    // return getComputerChoiceResult;    ----> Do not store the result in a variable that can't be accessed outside the function
+function playGame(playRounds, numberOfRounds) {
+  if (numberOfRounds <= 0) {
+    return;
+  }
+  playRounds();
+  playGame(playRounds, numberOfRounds -1);
 }
 
-const computerChoice = getComputerChoice(gameChoices); // Store the result here
-console.log(computerChoice);
-
-console.log(`The Computer selects ${computerChoice}.`)
-
-// The computer has selected. Its selection is stored in the variable named computerChoice.
-
-
-
-function playRound(userChoice, computerChoice) {
-    if (userChoice === computerChoice) {
-        console.log("Draw");
-    } else if ((userChoice === "rock" && computerChoice === "scissors") || (userChoice === "paper" && computerChoice === "rock") || (userChoice === "scissors" && computerChoice === "paper")) {
-        console.log("You Win");
-    } else {
-        console.log("You Lose");
-    }
-}
-
-playRound(userChoice, computerChoice);
-
-
-
-
-
-// function validateUserInput(userSelection) {
-//     if (userSelection !== "rock" && userSelection !== "paper" && userSelection !== "scissors") {
-//         return false; // Indicate invalid input
-//     }
-//     return true; // Indicate valid input
-// }
-
+playGame(playRounds, 5); // Calling playGame function, replacing numberOfRounds parameter with 5.
